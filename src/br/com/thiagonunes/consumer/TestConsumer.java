@@ -6,6 +6,7 @@ import javax.jms.Destination;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.naming.InitialContext;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class TestConsumer {
@@ -13,7 +14,13 @@ public class TestConsumer {
     @SuppressWarnings("resource")
     public static void main(String[] args) throws Exception {
 
-        InitialContext context = new InitialContext();
+        Properties properties = new Properties();
+
+        properties.setProperty("java.naming.factory.initial", "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
+        properties.setProperty("java.naming.provider.url", "tcp://localhost:61616");
+        properties.setProperty("queue.financeiro", "fila.financeiro");
+
+        InitialContext context = new InitialContext(properties);
 
         ConnectionFactory factory = (ConnectionFactory) context.lookup("ConnectionFactory");
         Connection connection = factory.createConnection();
