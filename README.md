@@ -1,3 +1,6 @@
+# Um pouco do fluxo do ActiveMQ para utiliza-lo em Producer/Consumer
+![image](https://user-images.githubusercontent.com/68428764/91353769-1b8b3100-e7c2-11ea-958e-e27ce354b35f.png)
+
 # Mensageria-com-activeMQ
 Intuito deste repositório é armazenar conteúdo aprendido sobre mensageria com ActiveMQ.
 
