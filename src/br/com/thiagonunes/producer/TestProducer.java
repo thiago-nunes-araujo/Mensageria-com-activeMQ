@@ -1,15 +1,16 @@
-package br.com.thiagonunes.consumer;
+package br.com.thiagonunes.producer;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
-import javax.jms.MessageConsumer;
+import javax.jms.Message;
+import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.naming.InitialContext;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class TestConsumer {
+public class TestProducer {
 
     @SuppressWarnings("resource")
     public static void main(String[] args) throws Exception {
@@ -28,11 +29,14 @@ public class TestConsumer {
 
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-        Destination destino = (Destination) context.lookup("financeiro");
+        Destination fila = (Destination) context.lookup("financeiro");
 
-        MessageConsumer messageConsumer = session.createConsumer(destino);
+        MessageProducer producer = session.createProducer(fila);
 
-        messageConsumer.setMessageListener(new MessageConsumerListener());
+        for (int i = 0; i < 55; i++){
+            Message message = session.createTextMessage("Mensagem numero: " + i);
+            producer.send(message);
+        }
 
         new Scanner(System.in).nextLine();
 
