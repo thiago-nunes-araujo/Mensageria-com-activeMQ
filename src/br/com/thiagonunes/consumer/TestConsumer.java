@@ -26,9 +26,7 @@ public class TestConsumer {
 
         MessageConsumer messageConsumer = session.createConsumer(destino);
 
-        Message message = messageConsumer.receive();
-
-        System.out.println("Mensagem recebida: " + message);
+        messageConsumer.setMessageListener(new MessageConsumerListener());
 
         new Scanner(System.in).nextLine();
 
